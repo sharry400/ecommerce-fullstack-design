@@ -1,63 +1,86 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
 
-// Yahan brackets { } ke andar 'id' likhna zaroori hai
-const ProductCard = ({ id, title, price, oldPrice, image }) => {
+const ProductCard = (props) => {
+  const { addToCart } = useContext(CartContext);
+
+  // Schema mismatch se bachne ke liye fallback logic lagaya hai
+  const id = props.id || props._id;
+  const title = props.title || props.name;
+  const price = props.price;
+  const image = props.image;
+
   return (
-    <div className="card border-0 shadow-sm h-100 position-relative">
+    <div className="card h-100 border-0 shadow-sm position-relative product-card" style={{ borderRadius: '8px', overflow: 'hidden', backgroundColor: '#fff' }}>
       
-      {/* Discount Badge (Agar oldPrice ho tabhi dikhaye) */}
-      {oldPrice && (
-        <span className="badge bg-danger position-absolute top-0 start-0 m-2 px-2 py-1">
-          -{Math.round(((oldPrice - price) / oldPrice) * 100)}%
-        </span>
-      )}
-      
-      {/* Favorite & Eye Icons */}
-      <div className="position-absolute top-0 end-0 m-2 d-flex flex-column gap-2">
-        <div className="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style={{ width: '30px', height: '30px', cursor: 'pointer' }}>
-          <i className="bi bi-heart"></i>
+      {/* 1. Image Container wrapped in Link for Product Click Action */}
+      <Link to={`/product-details/${id}`} className="text-decoration-none">
+        <div 
+          className="position-relative d-flex align-items-center justify-content-center p-3" 
+          style={{ 
+            height: '230px', 
+            backgroundColor: '#ffffff', 
+            width: '100%',
+            overflow: 'hidden'
+          }}
+        >
+          <img 
+            src={image} 
+            alt={title} 
+            style={{ 
+              maxHeight: '100%', 
+              maxWidth: '100%', 
+              objectFit: 'contain'
+            }} 
+          />
         </div>
-        <div className="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style={{ width: '30px', height: '30px', cursor: 'pointer' }}>
-          <i className="bi bi-eye"></i>
-        </div>
-      </div>
-
-      {/* Product Image Clickable Link */}
-      <Link to={`/product-details/${id}`} className="d-flex align-items-center justify-content-center p-3 bg-light text-decoration-none" style={{ height: '180px' }}>
-        <img 
-          src={image} 
-          alt={title} 
-          className="img-fluid" 
-          style={{ maxHeight: '100%', objectFit: 'contain' }}
-        />
       </Link>
 
-      <div className="card-body px-2 pb-2 pt-3">
-        {/* Product Title */}
-        <h6 className="card-title fw-bold text-truncate mb-1">{title}</h6>
-        
-        {/* Prices */}
-        <div className="d-flex align-items-center gap-2 mb-2">
-          <span className="text-danger fw-medium">${price}</span>
-          {oldPrice && <span className="text-muted text-decoration-line-through" style={{ fontSize: '14px' }}>${oldPrice}</span>}
+      {/* Wishlist and View Icons (Top Right Overlays) */}
+      <div className="position-absolute top-0 end-0 p-2 d-flex flex-column gap-2" style={{ zIndex: 2 }}>
+        <button className="btn btn-sm rounded-circle shadow-sm p-0 d-flex align-items-center justify-content-center" style={{ width: '34px', height: '34px', backgroundColor: '#fff', border: '1px solid #eee' }}>
+          <i className="bi bi-heart text-dark fs-6"></i>
+        </button>
+        <Link to={`/product-details/${id}`} className="btn btn-sm rounded-circle shadow-sm p-0 d-flex align-items-center justify-content-center" style={{ width: '34px', height: '34px', backgroundColor: '#fff', border: '1px solid #eee' }}>
+          <i className="bi bi-eye text-dark fs-6"></i>
+        </Link>
+      </div>
+
+      {/* 2. Product Details Section */}
+      <div className="card-body p-3 d-flex flex-column justify-content-between bg-white border-top border-light">
+        <div>
+          {/* Title also wrapped in Link for Click Action */}
+          <Link to={`/product-details/${id}`} className="text-decoration-none text-dark">
+            <h6 className="fw-bold text-dark text-truncate mb-1 fs-6" title={title} style={{ cursor: 'pointer' }}>
+              {title}
+            </h6>
+          </Link>
+          <div className="d-flex align-items-center gap-2 mb-2">
+            <span className="text-danger fw-bold fs-5">${price}</span>
+          </div>
+          
+          {/* Ratings */}
+          <div className="d-flex align-items-center gap-1 text-warning small mb-3">
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-half"></i>
+            <span className="text-muted ms-1" style={{ fontSize: '12px' }}>(88)</span>
+          </div>
         </div>
 
-        {/* Rating */}
-        <div className="d-flex align-items-center gap-1 text-warning" style={{ fontSize: '14px' }}>
-          <i className="bi bi-star-fill"></i>
-          <i className="bi bi-star-fill"></i>
-          <i className="bi bi-star-fill"></i>
-          <i className="bi bi-star-fill"></i>
-          <i className="bi bi-star-half"></i>
-          <span className="text-muted ms-1">(88)</span>
-        </div>
+        {/* 3. Add to Cart Button */}
+        <button 
+          className="btn btn-dark w-100 py-2 fw-medium d-flex align-items-center justify-content-center gap-2" 
+          style={{ borderRadius: '4px', backgroundColor: '#111', border: 'none', fontSize: '14px' }}
+          onClick={() => addToCart({ _id: id, name: title, price, image })}
+        >
+          <i className="bi bi-cart3"></i> Add To Cart
+        </button>
       </div>
-      
-      {/* Add to Cart Button (Hover par show hota hai aam taur par, abhi static lagaya hai) */}
-      <button className="btn btn-dark w-100 rounded-bottom" style={{ borderRadius: '0' }}>
-        Add To Cart
-      </button>
+
     </div>
   );
 };

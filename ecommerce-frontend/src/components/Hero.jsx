@@ -1,10 +1,10 @@
 import React from 'react';
-import iphoneImg from '../assets/IPhone.png';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <div className="container mt-4 mb-5">
-      <div className="row">
+    <div className="container mt-4 mb-lg-5">
+      <div className="row g-4">
         
         {/* Left Side: Categories Sidebar */}
         <div className="col-lg-3 d-none d-lg-block border-end pe-4 pt-3">
@@ -21,38 +21,50 @@ const Hero = () => {
           </ul>
         </div>
 
-        {/* Right Side: Main Black Banner */}
-        <div className="col-lg-9 ps-lg-5 pt-3">
-          <div className="bg-dark text-white d-flex flex-column flex-md-row align-items-center justify-content-between px-5 py-4" style={{ height: '350px' }}>
-            
-            {/* Banner Text Area */}
-            <div className="banner-text">
-              <div className="d-flex align-items-center gap-3 mb-3">
-                <i className="bi bi-apple fs-2"></i>
-                <span style={{ fontSize: '14px' }}>iPhone 14 Series</span>
+        {/* Right Side: Main Premium Banner Wrapper */}
+        <div className="col-12 col-lg-9 pt-lg-3">
+          <div 
+            className="text-white rounded p-4 p-md-5 overflow-hidden d-flex align-items-center" 
+            style={{ 
+              minHeight: '380px', 
+              background: 'linear-gradient(135deg, #09090b 0%, #1e1e2f 100%)', // Rich Dark Metallic Gradient
+              boxShadow: '0 15px 35px rgba(0,0,0,0.2)'
+            }}
+          >
+            <div className="row align-items-center g-4 w-100">
+              
+              {/* Left/Top Content Column */}
+              <div className="col-12 col-md-6 text-center text-md-start">
+                <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+                  <i className="bi bi-apple fs-2"></i>
+                  <span className="text-light opacity-75 small fw-semibold">iPhone 14 Series</span>
+                </div>
+                <h1 className="fw-bold mb-4 display-5" style={{ letterSpacing: '1px', lineHeight: '1.2' }}>
+                  Up to 10% off Voucher
+                </h1>
+                <Link to="/products" className="text-white text-decoration-underline fw-medium fs-6 pb-1">
+                  Shop Now <i className="bi bi-arrow-right ms-1"></i>
+                </Link>
               </div>
-              <h1 className="display-5 fw-bold mb-4" style={{ lineHeight: '1.2' }}>
-                Up to 10% <br /> off Voucher
-              </h1>
-              <a href="#" className="text-white text-decoration-none d-inline-flex align-items-center gap-2 pb-1 border-bottom border-light">
-                Shop Now <i className="bi bi-arrow-right"></i>
-              </a>
-            </div>
 
-            {/* Banner Image Area */}
-            <div className="banner-image mt-4 mt-md-0 text-center">
-               {/* Yahan par hum abhi placeholder text rakh rahe hain. 
-                   Aap assets folder se real image yahan lagayenge. */}
-              <div className="text-muted d-flex align-items-center justify-content-center" style={{ width: '250px', height: '250px', border: '1px dashed gray' }}>
-                 <img 
-                 src={iphoneImg} 
-                 alt="iPhone banner" 
-                className="img-fluid" // Bootstrap class responsive banane ke liye
-                style={{ maxHeight: '350px' }} // Height control karne ke liye 
-                 />
+              {/* Right/Bottom Image Column */}
+              <div className="col-12 col-md-6 text-center d-flex justify-content-center align-items-center position-relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=600&q=80" // Premium sleek iPhone asset without white boxes
+                  alt="iPhone Premium" 
+                  className="img-fluid rounded shadow" 
+                  style={{ 
+                    maxHeight: '320px', // Full size display
+                    width: '100%',
+                    maxWidth: '280px',
+                    objectFit: 'cover',
+                    borderRadius: '20px',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)', // Real depth shadow
+                  }} 
+                />
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
 

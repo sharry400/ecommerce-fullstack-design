@@ -1,66 +1,101 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Yahan Link import karna zaroori hai
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
+  const { cart } = useContext(CartContext);
+  const { user, logoutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser();
+    alert("Logged out successfully!");
+    navigate('/login');
+  };
+
   return (
-    <header>
-      {/* Top Black Bar */}
-      <div className="bg-dark text-white text-center py-2" style={{ fontSize: '14px' }}>
-        <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! </span>
-        <a href="#" className="text-white ms-2 fw-bold">ShopNow</a>
-      </div>
-
-      {/* Main Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 border-bottom">
-        <div className="container">
-          {/* Logo */}
-          <Link className="navbar-brand fw-bold fs-4" to="/">Exclusive</Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-2 py-md-3">
+      <div className="container">
+        {/* Brand Logo & Toggler Row for Mobile */}
+        <div className="d-flex justify-content-between align-items-center w-100 d-lg-none">
+          <Link className="navbar-brand fw-bold fs-3 text-dark mb-0" to="/">Exclusive</Link>
           
-          {/* Mobile Toggle Button */}
-          <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          {/* Links & Icons */}
-          <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
-            
-            {/* Center Links */}
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-3 fw-medium">
-              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/">Sign Up</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/products">Shop</Link></li>
-            </ul>
-
-            {/* Right Side: Search & Icons */}
-            <div className="d-flex align-items-center gap-3">
-              {/* Search Bar */}
-              <div className="input-group" style={{ width: '240px' }}>
-                <input 
-                  type="text" 
-                  className="form-control bg-light border-0 shadow-none" 
-                  placeholder="What are you looking for?" 
-                  style={{ fontSize: '13px' }}
-                />
-                <span className="input-group-text bg-light border-0 cursor-pointer">
-                  <i className="bi bi-search"></i>
+          <div className="d-flex align-items-center gap-3">
+            {/* Mobile Cart Icon */}
+            <Link to="/cart" className="position-relative text-dark text-decoration-none me-2">
+              <i className="bi bi-cart3 fs-4"></i>
+              {cart.length > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger text-white" style={{ fontSize: '9px', padding: '4px 6px' }}>
+                  {cart.reduce((total, item) => total + item.quantity, 0)}
                 </span>
-              </div>
-              
-              {/* Wishlist & Cart Icons */}
-              <i className="bi bi-heart fs-5" style={{ cursor: 'pointer' }}></i>
-              
-              {/* Cart Icon ko Link mein wrap kar diya */}
-              <Link to="/cart" className="text-dark">
-                <i className="bi bi-cart3 fs-5" style={{ cursor: 'pointer' }}></i>
-              </Link>
-            </div>
+              )}
+            </Link>
             
+            {/* Fixed Toggler Button without extra stretch classes */}
+            <button className="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span className="navbar-toggler-icon" style={{ width: '1.2em', height: '1.2em' }}></span>
+            </button>
           </div>
         </div>
-      </nav>
-    </header>
+
+        {/* Desktop Brand Logo */}
+        <Link className="navbar-brand fw-bold fs-3 text-dark d-none d-lg-block" to="/">Exclusive</Link>
+
+        {/* Collapsible Menu Items */}
+        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul className="navbar-nav gap-lg-3 fs-6 my-3 my-lg-0">
+            <li className="nav-item"><Link className="nav-link text-dark" to="/">Home</Link></li>
+            <li className="nav-item"><Link className="nav-link text-dark" to="/products">Shop</Link></li>
+            {user && user.isAdmin && (
+              <li className="nav-item">
+                <Link className="nav-link text-danger fw-bold" to="/admin">Admin Panel</Link>
+              </li>
+            )}
+          </ul>
+          
+          {/* Mobile Auth Actions inside collapse menu */}
+          <div className="d-lg-none border-top pt-3 mt-2">
+            {user ? (
+              <div className="d-flex flex-column gap-2">
+                <span className="fw-medium text-secondary">Hi, {user.name}</span>
+                <button className="btn btn-sm btn-outline-dark w-100" onClick={handleLogout}>Logout</button>
+              </div>
+            ) : (
+              <div className="d-flex gap-2">
+                <Link to="/login" className="btn btn-sm btn-outline-danger flex-grow-1 text-center">Login</Link>
+                <Link to="/signup" className="btn btn-sm btn-danger text-white flex-grow-1 text-center">Sign Up</Link>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Desktop Side Icons & Auth Status */}
+        <div className="d-none d-lg-flex align-items-center gap-4">
+          <Link to="/cart" className="position-relative text-dark text-decoration-none">
+            <i className="bi bi-cart3 fs-4"></i>
+            {cart.length > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger text-white" style={{ fontSize: '10px' }}>
+                {cart.reduce((total, item) => total + item.quantity, 0)}
+              </span>
+            )}
+          </Link>
+
+          {user ? (
+            <div className="d-flex align-items-center gap-3">
+              <span className="fw-medium text-secondary">Hi, {user.name}</span>
+              <button className="btn btn-sm btn-outline-dark" onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <div className="d-flex gap-2">
+              <Link to="/login" className="btn btn-sm btn-outline-danger">Login</Link>
+              <Link to="/signup" className="btn btn-sm btn-danger text-white">Sign Up</Link>
+            </div>
+          )}
+        </div>
+
+      </div>
+    </nav>
   );
 };
 

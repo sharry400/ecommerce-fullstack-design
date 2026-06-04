@@ -8,14 +8,14 @@ const router = express.Router();
 // ==========================================
 router.post('/seed', async (req, res) => {
     const sampleProducts = [
-    { name: "HAVIT HV-G92 Gamepad", price: 120, image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=400&q=80", description: "Gaming controller with vibration", category: "Electronics", stock: 15 },
-    { name: "AK-900 Wired Keyboard", price: 960, image: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&q=80", description: "Mechanical wired gaming keyboard", category: "Electronics", stock: 10 },
-    { name: "IPS LCD Gaming Monitor", price: 370, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80", description: "27 inch IPS Display, 144Hz", category: "Electronics", stock: 5 },
-    { name: "S-Series Comfort Chair", price: 375, image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&q=80", description: "Ergonomic chair for long hours", category: "Furniture", stock: 20 },
-    { name: "Breed Dry Dog Food", price: 100, image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&q=80", description: "Premium quality dog food", category: "Pets", stock: 50 },
-    { name: "CANON EOS DSLR Camera", price: 360, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80", description: "High resolution camera", category: "Electronics", stock: 8 },
-    { name: "ASUS FHD Gaming Laptop", price: 700, image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&q=80", description: "Powerful gaming laptop", category: "Electronics", stock: 12 },
-    { name: "Curology Product Set", price: 500, image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80", description: "Skincare product kit", category: "Health & Beauty", stock: 25 }
+    { name: "HAVIT HV-G92 Gamepad", price: 120, image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=500&q=80", description: "Gaming controller with vibration", category: "Electronics", stock: 15 },
+    { name: "AK-900 Wired Keyboard", price: 960, image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=500&q=80", description: "Mechanical wired gaming keyboard", category: "Electronics", stock: 10 },
+    { name: "IPS LCD Gaming Monitor", price: 370, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80", description: "27 inch IPS Display, 144Hz", category: "Electronics", stock: 5 },
+    { name: "S-Series Comfort Chair", price: 375, image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500&q=80", description: "Ergonomic chair for long hours", category: "Furniture", stock: 20 },
+    { name: "Breed Dry Dog Food", price: 100, image: "https://images.unsplash.com/photo-1544568100-847a948585b9?w=500&q=80", description: "Premium quality dog food", category: "Pets", stock: 50 },
+    { name: "CANON EOS DSLR Camera", price: 360, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80", description: "High resolution camera", category: "Electronics", stock: 8 },
+    { name: "ASUS FHD Gaming Laptop", price: 700, merge: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80", description: "Powerful gaming laptop", category: "Electronics", stock: 12 },
+    { name: "Curology Product Set", price: 500, image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&q=80", description: "Skincare product kit", category: "Health & Beauty", stock: 25 }
   ];
 
   try {
