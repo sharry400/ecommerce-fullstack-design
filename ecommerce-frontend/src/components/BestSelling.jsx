@@ -8,7 +8,7 @@ const BestSelling = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get('http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products');
 
         setProducts(response.data.slice(-4).reverse());
       } catch (error) {

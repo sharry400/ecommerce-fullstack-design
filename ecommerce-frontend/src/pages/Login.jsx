@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setError('');
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post('http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/auth/login', formData);
 
 
       loginUser(response.data.user, response.data.token);
