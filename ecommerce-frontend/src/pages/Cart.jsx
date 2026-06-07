@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
-  // Context se cart data aur remove function uthaya
+
   const { cart, removeFromCart } = useContext(CartContext);
 
-  // Total bill calculate karne ka logic
+
   const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   return (
@@ -26,7 +26,7 @@ const Cart = () => {
         </div>
       ) : (
         <div className="row g-5">
-          {/* Cart Items Table */}
+          {}
           <div className="col-lg-8">
             <div className="table-responsive">
               <table className="table align-middle">
@@ -43,9 +43,9 @@ const Cart = () => {
                     <tr key={item._id}>
                       <td>
                         <div className="d-flex align-items-center gap-3">
-                          {/* Remove Item Button */}
-                          <button 
-                            className="btn btn-sm btn-outline-danger rounded-circle px-2" 
+                          {}
+                          <button
+                            className="btn btn-sm btn-outline-danger rounded-circle px-2"
                             onClick={() => removeFromCart(item._id)}
                           >
                             X

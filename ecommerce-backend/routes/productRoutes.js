@@ -3,9 +3,9 @@ const Product = require('../models/Product');
 
 const router = express.Router();
 
-// ==========================================
-// SEED API: Database mein sample data dalne ke liye
-// ==========================================
+
+
+
 router.post('/seed', async (req, res) => {
     const sampleProducts = [
     { name: "HAVIT HV-G92 Gamepad", price: 120, image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=500&q=80", description: "Gaming controller with vibration", category: "Electronics", stock: 15 },
@@ -19,7 +19,7 @@ router.post('/seed', async (req, res) => {
   ];
 
   try {
-    await Product.deleteMany(); // Purana data clean karne ke liye
+    await Product.deleteMany();
     const createdProducts = await Product.insertMany(sampleProducts);
     res.status(201).json({ message: "Sample data successfully seeded!", products: createdProducts });
   } catch (error) {
@@ -27,11 +27,11 @@ router.post('/seed', async (req, res) => {
   }
 });
 
-// ==========================================
-// CRUD APIs
-// ==========================================
 
-// 1. CREATE: Naya product add karne ke liye (POST)
+
+
+
+
 router.post('/', async (req, res) => {
   try {
     const newProduct = new Product(req.body);
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 2. READ ALL: Saare products mangwane ke liye (GET)
+
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 3. READ SINGLE: Kisi ek product ki details mangwane ke liye (GET by ID)
+
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -63,7 +63,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// 4. UPDATE: Kisi product ko edit karne ke liye (PUT)
+
 router.put('/:id', async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -73,13 +73,32 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// 5. DELETE: Kisi product ko delete karne ke liye (DELETE)
+
 router.delete('/:id', async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting product", error: error.message });
+  }
+});
+
+
+
+
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found!" });
+    }
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating product", error: error.message });
   }
 });
 

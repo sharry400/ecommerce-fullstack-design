@@ -9,8 +9,8 @@ const FlashSales = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/products');
-        // Flash sale mein sirf shuru ke 4 products dikhayenge
-        setProducts(response.data.slice(0, 4)); 
+
+        setProducts(response.data.slice(0, 4));
       } catch (error) {
         console.error("Error fetching flash sales:", error);
       }
@@ -24,7 +24,7 @@ const FlashSales = () => {
         <div className="bg-danger rounded" style={{ width: '20px', height: '40px' }}></div>
         <h6 className="text-danger fw-bold m-0">Today's</h6>
       </div>
-      
+
       <div className="d-flex align-items-center mb-4">
         <h2 className="fw-bold me-5">Flash Sales</h2>
       </div>
@@ -32,7 +32,7 @@ const FlashSales = () => {
       <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
         {products.map((product) => (
           <div className="col" key={product._id}>
-            <ProductCard 
+            <ProductCard
               id={product._id}
               title={product.name}
               price={product.price}
@@ -41,7 +41,7 @@ const FlashSales = () => {
           </div>
         ))}
       </div>
-      
+
       <div className="text-center mt-4">
         <button className="btn btn-danger px-5 py-3 rounded-1">View All Products</button>
       </div>

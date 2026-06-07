@@ -20,19 +20,21 @@ const Navbar = () => {
         {/* Brand Logo & Toggler Row for Mobile */}
         <div className="d-flex justify-content-between align-items-center w-100 d-lg-none">
           <Link className="navbar-brand fw-bold fs-3 text-dark mb-0" to="/">Exclusive</Link>
-          
+
           <div className="d-flex align-items-center gap-3">
-            {/* Mobile Cart Icon */}
-            <Link to="/cart" className="position-relative text-dark text-decoration-none me-2">
-              <i className="bi bi-cart3 fs-4"></i>
-              {cart.length > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger text-white" style={{ fontSize: '9px', padding: '4px 6px' }}>
-                  {cart.reduce((total, item) => total + item.quantity, 0)}
-                </span>
-              )}
-            </Link>
-            
-            {/* Fixed Toggler Button without extra stretch classes */}
+            {/* Mobile Cart Icon - SIRF AAM USER KE LIYE */}
+            {(!user || !user.isAdmin) && (
+              <Link to="/cart" className="position-relative text-dark text-decoration-none me-2">
+                <i className="bi bi-cart3 fs-4"></i>
+                {cart.length > 0 && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger text-white" style={{ fontSize: '9px', padding: '4px 6px' }}>
+                    {cart.reduce((total, item) => total + item.quantity, 0)}
+                  </span>
+                )}
+              </Link>
+            )}
+
+            {/* Toggler Button */}
             <button className="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
               <span className="navbar-toggler-icon" style={{ width: '1.2em', height: '1.2em' }}></span>
             </button>
@@ -53,7 +55,7 @@ const Navbar = () => {
               </li>
             )}
           </ul>
-          
+
           {/* Mobile Auth Actions inside collapse menu */}
           <div className="d-lg-none border-top pt-3 mt-2">
             {user ? (
@@ -72,14 +74,18 @@ const Navbar = () => {
 
         {/* Desktop Side Icons & Auth Status */}
         <div className="d-none d-lg-flex align-items-center gap-4">
-          <Link to="/cart" className="position-relative text-dark text-decoration-none">
-            <i className="bi bi-cart3 fs-4"></i>
-            {cart.length > 0 && (
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger text-white" style={{ fontSize: '10px' }}>
-                {cart.reduce((total, item) => total + item.quantity, 0)}
-              </span>
-            )}
-          </Link>
+
+          {/* Desktop Cart Icon - SIRF AAM USER KE LIYE */}
+          {(!user || !user.isAdmin) && (
+            <Link to="/cart" className="position-relative text-dark text-decoration-none">
+              <i className="bi bi-cart3 fs-4"></i>
+              {cart.length > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger text-white" style={{ fontSize: '10px' }}>
+                  {cart.reduce((total, item) => total + item.quantity, 0)}
+                </span>
+              )}
+            </Link>
+          )}
 
           {user ? (
             <div className="d-flex align-items-center gap-3">

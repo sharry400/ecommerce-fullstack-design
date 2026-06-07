@@ -13,7 +13,7 @@ const Signup = () => {
       setError('');
       const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
       alert(response.data.message);
-      navigate('/login'); // Account banne ke baad login page par bhej dein
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong!');
     }
@@ -24,38 +24,38 @@ const Signup = () => {
       <div className="card p-4 shadow-sm" style={{ width: '400px', borderRadius: '8px' }}>
         <h3 className="fw-bold text-center mb-4">Create an Account</h3>
         {error && <div className="alert alert-danger py-2">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">Full Name</label>
-            <input 
-              type="text" 
-              className="form-control" 
-              required 
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
           </div>
           <div className="mb-3">
             <label className="form-label">Email Address</label>
-            <input 
-              type="email" 
-              className="form-control" 
-              required 
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+            <input
+              type="email"
+              className="form-control"
+              required
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
           </div>
           <div className="mb-4">
             <label className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-control" 
-              required 
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
+            <input
+              type="password"
+              className="form-control"
+              required
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             />
           </div>
           <button type="submit" className="btn btn-danger w-100 py-2 mb-3">Sign Up</button>
         </form>
-        
+
         <p className="text-center text-muted mb-0">
           Already have an account? <Link to="/login" className="text-danger text-decoration-none fw-medium">Login</Link>
         </p>

@@ -6,8 +6,8 @@ import ProductCard from '../components/ProductCard';
 const ProductListing = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  // Naye states Search aur Category filter ke liye
+
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -26,15 +26,15 @@ const ProductListing = () => {
     fetchProducts();
   }, []);
 
-  // Filter karne ka main logic
+
   const filteredProducts = products.filter((product) => {
-    // Search bar mein jo likha hai usay name ya category se match karein
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           product.category.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    // Checkbox wali category se match karein (agar koi select ki hai)
+
+
     const matchesCategory = selectedCategory === '' || product.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -70,17 +70,17 @@ const ProductListing = () => {
           </ul>
         </div>
 
-        {/* Main Product Grid */}
+        {}
         <div className="col-lg-9">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <h4 className="fw-bold m-0">All Products</h4>
-            
+
             {/* Search Bar Input */}
             <div className="input-group" style={{ width: '300px' }}>
-              <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Search products..." 
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -100,7 +100,7 @@ const ProductListing = () => {
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => (
                   <div className="col" key={product._id}>
-                    <ProductCard 
+                    <ProductCard
                       id={product._id}
                       title={product.name}
                       price={product.price}

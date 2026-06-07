@@ -10,8 +10,8 @@ const ExploreProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/products');
-        // Home page ke liye hum sirf shuru ke 8 products dikhayenge
-        setProducts(response.data.slice(0, 8)); 
+
+        setProducts(response.data.slice(0, 8));
         setLoading(false);
       } catch (error) {
         console.error("Error fetching featured products:", error);
@@ -24,14 +24,14 @@ const ExploreProducts = () => {
 
   return (
     <div className="container mb-5 mt-5">
-      {/* Section Header */}
+      {}
       <div className="d-flex align-items-center gap-3 mb-3">
         <div className="bg-danger rounded" style={{ width: '20px', height: '40px' }}></div>
         <h6 className="text-danger fw-bold m-0">Our Products</h6>
       </div>
       <h2 className="fw-bold mb-4">Explore Our Products</h2>
 
-      {/* Loading Indicator or Product Grid */}
+      {}
       {loading ? (
         <div className="text-center py-5">
           <div className="spinner-border text-danger" role="status">
@@ -42,7 +42,7 @@ const ExploreProducts = () => {
         <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
           {products.map((product) => (
             <div className="col" key={product._id}>
-              <ProductCard 
+              <ProductCard
                 id={product._id}
                 title={product.name}
                 price={product.price}
@@ -53,7 +53,7 @@ const ExploreProducts = () => {
         </div>
       )}
 
-      {/* View All Button */}
+      {}
       <div className="text-center mt-5">
         <button className="btn btn-danger px-5 py-3 rounded-1">View All Products</button>
       </div>

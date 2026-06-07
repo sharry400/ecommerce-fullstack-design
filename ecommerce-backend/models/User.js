@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  name: { 
-    type: String, 
-    required: true 
+  name: {
+    type: String,
+    required: true
   },
-  email: { 
-    type: String, 
-    required: true, 
-    unique: true // Ek email se ek hi account banega
+  email: {
+    type: String,
+    required: true,
+    unique: true
   },
-  password: { 
-    type: String, 
-    required: true 
+  password: {
+    type: String,
+    required: true
   },
-  isAdmin: { 
-    type: Boolean, 
-    default: false // By default koi bhi naya user admin nahi hoga
+  isAdmin: {
+    type: Boolean,
+    default: false
   }
 }, { timestamps: true });
 

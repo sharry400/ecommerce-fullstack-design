@@ -9,8 +9,8 @@ const BestSelling = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/products');
-        // Best selling mein aakhri 4 products dikhayenge (reverse order mein)
-        setProducts(response.data.slice(-4).reverse()); 
+
+        setProducts(response.data.slice(-4).reverse());
       } catch (error) {
         console.error("Error fetching best selling:", error);
       }
@@ -33,7 +33,7 @@ const BestSelling = () => {
       <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
         {products.map((product) => (
           <div className="col" key={product._id}>
-            <ProductCard 
+            <ProductCard
               id={product._id}
               title={product.name}
               price={product.price}

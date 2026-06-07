@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { CartContext } from '../context/CartContext'; // Context Import kiya
+import { CartContext } from '../context/CartContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  
-  // Cart ka data aur function nikal rahe hain
+
+
   const { addToCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
 
@@ -63,16 +63,16 @@ const ProductDetails = () => {
           <p className="text-muted mb-4 pb-4 border-bottom">{product.description}</p>
           <p className="fw-medium mb-4">Category: <span className="text-muted">{product.category}</span></p>
 
-          {/* Actions: Quantity & Add to Cart */}
+          {}
           <div className="d-flex align-items-center gap-3 mb-5">
             <div className="input-group" style={{ width: '130px' }}>
               <button className="btn btn-outline-secondary fs-5 py-1 px-3" onClick={() => setQuantity(q => q > 1 ? q - 1 : 1)}>-</button>
               <input type="text" className="form-control text-center fs-5 py-1" value={quantity} readOnly />
               <button className="btn btn-danger text-white fs-5 py-1 px-3" onClick={() => setQuantity(q => q + 1)}>+</button>
             </div>
-            
-            {/* Real Add to Cart Button */}
-            <button 
+
+            {}
+            <button
               className="btn btn-danger px-5 py-2 fs-5 flex-grow-1"
               onClick={() => {
                 addToCart(product, quantity);

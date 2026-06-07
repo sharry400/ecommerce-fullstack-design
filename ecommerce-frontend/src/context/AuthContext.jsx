@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // App load hote hi check karein agar user pehle se logged in hai
+
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Login successfully hone par state save karne ka function
+
   const loginUser = (userData, userToken) => {
     setUser(userData);
     setToken(userToken);
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', userToken);
   };
 
-  // Logout karne ka function
+
   const logoutUser = () => {
     setUser(null);
     setToken(null);
