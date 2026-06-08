@@ -8,12 +8,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// THE ULTIMATE FIX: Agar Vercel env variable load na kare, toh yeh direct link use kar lega
-const DB_URL = process.env.MONGO_URI || "mongodb+srv://wwwsharryiqbal73_db_user:FtmIjLNjlte4zgek@cluster0.vrfofwn.mongodb.net/ecommerce?retryWrites=true&w=majority";
-
-mongoose.connect(DB_URL)
-  .then(() => console.log('MongoDB successfully connected!'))
-  .catch((err) => console.log('MongoDB connection error:', err));
+const connectDB = async () => {
+  try {
+    const DB_URL = process.env.MONGO_URI || "mongodb+srv://wwwsharryiqbal73_db_user:FtmIjLNjlte4zgek@cluster0.vrfofwn.mongodb.net/ecommerce?retryWrites=true&w=majority";
+    await mongoose.connect(DB_URL);
+    console.log('MongoDB successfully connected for Vercel!');
+  } catch (err) {
+    console.log('MongoDB connection error:', err);
+  }
+};
+connectDB();
 
 const productRoutes = require('./routes/productRoutes');
 app.use('/api/products', productRoutes);
