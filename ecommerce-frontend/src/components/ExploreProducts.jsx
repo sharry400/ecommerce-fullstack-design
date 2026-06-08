@@ -9,8 +9,7 @@ const ExploreProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products');
-
+        const response = await axios.get('https://ecommerce-fullstack-design-cq4y.vercel.app/api/products');
         setProducts(response.data.slice(0, 8));
         setLoading(false);
       } catch (error) {

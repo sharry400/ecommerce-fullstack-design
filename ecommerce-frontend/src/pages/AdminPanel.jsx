@@ -75,7 +75,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await axios.delete(`http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products/${id}`);
+        await axios.delete(`https://ecommerce-fullstack-design-cq4y.vercel.app/api/products/${id}`);
         alert('Product Deleted!');
         if(editId === id) handleCancelEdit();
         fetchProducts();

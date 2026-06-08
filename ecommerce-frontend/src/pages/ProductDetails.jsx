@@ -15,7 +15,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products/${id}`);
+        const response = await axios.get(`https://ecommerce-fullstack-design-cq4y.vercel.app/api/products/${id}`);
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
