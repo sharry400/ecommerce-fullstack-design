@@ -11,7 +11,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       setError('');
-      const response = await axios.post('https://ecommerce-fullstack-design-cq4y.vercel.app/api/auth/signup', formData);
+      const response = await axios.post('https://ecommerce-fullstack-design-liart-tau.vercel.app/api/auth/signup', formData);
       alert(response.data.message);
       navigate('/login');
     } catch (err) {

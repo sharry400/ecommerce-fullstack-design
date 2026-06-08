@@ -13,7 +13,7 @@ const AdminPanel = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products');
+      const response = await axios.get('https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products');
       setProducts(response.data);
       setLoading(false);
     } catch (error) {
@@ -31,13 +31,13 @@ const AdminPanel = () => {
     try {
       if (isEditing) {
 
-        await axios.put(`http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products/${editId}`, formData);
+        await axios.put(`https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products/${editId}`, formData);
         alert('Product Updated Successfully!');
         setIsEditing(false);
         setEditId(null);
       } else {
 
-        await axios.post('http://https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products', formData);
+        await axios.post('https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products', formData);
         alert('Product Added Successfully!');
       }
 
@@ -75,7 +75,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await axios.delete(`https://ecommerce-fullstack-design-cq4y.vercel.app/api/products/${id}`);
+        await axios.delete(`https://ecommerce-fullstack-design-liart-tau.vercel.app/api/products/${id}`);
         alert('Product Deleted!');
         if(editId === id) handleCancelEdit();
         fetchProducts();

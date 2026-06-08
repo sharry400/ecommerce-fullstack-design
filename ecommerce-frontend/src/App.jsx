@@ -28,7 +28,6 @@ const PrivateRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" replace />;
 };
 
-// 2. PUBLIC ROUTE GUARD (Logged-in user ko wapas login/signup par jaane se rokne ke liye)
 const PublicRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   if (loading) return null;

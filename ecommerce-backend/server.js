@@ -6,6 +6,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors());
+app.get('/', (req, res) => res.send('API is running perfectly!'));
 app.use(express.json());
 
 const connectDB = async () => {
@@ -30,5 +31,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
 
-// VERCEL KE LIYE SAB SE ZAROORI LINE (Iske bina Vercel API ko nahi parh sakta)
 module.exports = app;
